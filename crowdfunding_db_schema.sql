@@ -13,8 +13,9 @@ CREATE TABLE "campaign" (
     "outcome" varchar(25)   NOT NULL,
     "backers_count" int   NOT NULL,
     "country" varchar(25)   NOT NULL,
-    "launched_date" date   NOT NULL,
-    "end_date" date   NOT NULL,
+	"currency" varchar(10)	NOT NULL,
+    "launched_date" timestamp   NOT NULL,
+    "end_date" timestamp   NOT NULL,
     "category_id" varchar(25)   NOT NULL,
     "subcategory_id" varchar(25)   NOT NULL,
     CONSTRAINT "pk_campaign" PRIMARY KEY (
@@ -57,10 +58,11 @@ REFERENCES "category" ("category_id");
 ALTER TABLE "campaign" ADD CONSTRAINT "fk_campaign_subcategory_id" FOREIGN KEY("subcategory_id")
 REFERENCES "subcategory" ("subcategory_id");
 
-SELECT * FROM campaign;
+-- Must import contacts, category, and subcategory before campaign because campaign references those tables.
+SELECT * FROM contacts;
 
 SELECT * FROM category;
 
-SELECT * FROM contacts;
-
 SELECT * FROM subcategory;
+
+SELECT * FROM campaign;
